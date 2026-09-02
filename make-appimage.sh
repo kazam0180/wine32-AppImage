@@ -175,7 +175,9 @@ rm -f ./AppDir/lib/wine/x86_64-windows/qasf*
 rm -f ./AppDir/lib/wine/x86_64-windows/qcap*
 rm -f ./AppDir/lib/wine/x86_64-windows/qedit*
 rm -f ./AppDir/lib/wine/x86_64-windows/quartz*
-# OpenGL/Vulkan (keep opengl32 + glu32 for q3map)
+# OpenGL/Vulkan
+rm -f ./AppDir/lib/wine/x86_64-windows/opengl*
+rm -f ./AppDir/lib/wine/x86_64-windows/glu*
 rm -f ./AppDir/lib/wine/x86_64-windows/*vulkan*
 # Display drivers
 rm -f ./AppDir/lib/wine/x86_64-windows/winemac.drv
