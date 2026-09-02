@@ -4,12 +4,20 @@ set -eu
 
 ARCH=$(uname -m)
 
+echo "Enabling the multilib repo (needed for the lib32-* packages)..."
+echo "---------------------------------------------------------------"
+if ! sudo grep -q '^\[multilib\]' /etc/pacman.conf; then
+	sudo sh -c "printf '\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n' >> /etc/pacman.conf"
+fi
+
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 sudo pacman -Syu --noconfirm patchelf file
 
 if [ "$ARCH" = 'x86_64' ]; then
-	sudo pacman -S --noconfirm mingw-w64-binutils mingw-w64-gcc lib32-glibc
+	# lib32-gcc-libs provides the 32-bit libgcc_s.so.1 needed to link
+	# anylinux.so with -m32 (32-bit deployment mode of quick-sharun)
+	sudo pacman -S --noconfirm mingw-w64-binutils mingw-w64-gcc lib32-glibc lib32-gcc-libs
 fi
 
 # Download Kron4ek 32-bit wine build
