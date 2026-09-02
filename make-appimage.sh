@@ -58,6 +58,37 @@ fi
 # Remove x86_64 Windows DLLs - only need i386 for 32-bit apps
 rm -rf ./AppDir/lib/wine/x86_64-windows
 
+# Remove GUI-related wine DLLs from i386-windows
+rm -f ./AppDir/lib/wine/i386-windows/gdi32.dll
+rm -f ./AppDir/lib/wine/i386-windows/gdiplus.dll
+rm -f ./AppDir/lib/wine/i386-windows/d3d*.dll
+rm -f ./AppDir/lib/wine/i386-windows/ddraw.dll
+rm -f ./AppDir/lib/wine/i386-windows/dinput*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dsound.dll
+rm -f ./AppDir/lib/wine/i386-windows/dplay*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dmusic*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dshow*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dxdiag*.dll
+rm -f ./AppDir/lib/wine/i386-windows/opengl*.dll
+rm -f ./AppDir/lib/wine/i386-windows/winemac.drv
+rm -f ./AppDir/lib/wine/i386-windows/winevulkan.drv
+rm -f ./AppDir/lib/wine/i386-windows/winex11.drv
+rm -f ./AppDir/lib/wine/i386-windows/winewayland.drv
+rm -f ./AppDir/lib/wine/i386-windows/xaudio2_*.dll
+
+# Remove GUI-related wine .so from x86_64-unix
+rm -f ./AppDir/lib/wine/x86_64-unix/opengl32.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winevulkan.so
+rm -f ./AppDir/lib/wine/x86_64-unix/wined3d.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winegstreamer.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winealsa.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winepulse.so
+rm -f ./AppDir/lib/wine/x86_64-unix/wineps.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winex11.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winewayland.so
+rm -f ./AppDir/lib/wine/x86_64-unix/avicap32.so
+rm -f ./AppDir/lib/wine/x86_64-unix/gphoto2.so
+
 # Remove unnecessary libraries for CLI-only mode
 echo "Removing unnecessary libraries..."
 rm -rf ./AppDir/lib/alsa-lib
