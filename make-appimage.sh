@@ -240,6 +240,46 @@ rm -f ./AppDir/lib/wine/x86_64-unix/qcap.so
 rm -f ./AppDir/lib/wine/x86_64-unix/sane.so
 rm -f ./AppDir/lib/wine/x86_64-unix/wpcap.so
 
+# Build stub opengl32.dll and glu32.dll for q3map compatibility
+echo "Building stub OpenGL DLLs..."
+cat > /tmp/opengl32.c << 'GLEOF'
+#include <windows.h>
+#include <wingdi.h>
+BOOL WINAPI DllMain(HINSTANCE h, DWORD r, LPVOID v) { return TRUE; }
+void __stdcall glColor4f(float r, float g, float b, float a) {}
+void __stdcall glOrtho(double l, double r, double b, double t, double n, double f) {}
+void __stdcall glMatrixMode(int mode) {}
+void __stdcall glViewport(int x, int y, int w, int h) {}
+void __stdcall glDrawBuffer(int mode) {}
+void __stdcall glClearIndex(float c) {}
+void __stdcall glFlush(void) {}
+void __stdcall glBlendFunc(int sf, int df) {}
+void __stdcall glEnable(int cap) {}
+void __stdcall glDisable(int cap) {}
+void __stdcall glPolygonMode(int f, int m) {}
+void __stdcall glColor3f(float r, float g, float b) {}
+void __stdcall glLoadIdentity(void) {}
+void __stdcall glClear(int mask) {}
+void __stdcall glClearColor(float r, float g, float b, float a) {}
+void __stdcall glEnd(void) {}
+void __stdcall glVertex3f(float x, float y, float z) {}
+void __stdcall glBegin(int mode) {}
+HGLRC __stdcall wglCreateContext(HDC hdc) { return NULL; }
+BOOL __stdcall wglMakeCurrent(HDC hdc, HGLRC hglrc) { return FALSE; }
+BOOL __stdcall wglDeleteContext(HGLRC hglrc) { return TRUE; }
+GLEOF
+
+cat > /tmp/glu32.c << 'GLEOF'
+#include <windows.h>
+BOOL WINAPI DllMain(HINSTANCE h, DWORD r, LPVOID v) { return TRUE; }
+void __stdcall gluPerspective(double fovy, double aspect, double zNear, double zFar) {}
+void __stdcall gluLookAt(double eX, double eY, double eZ, double cX, double cY, double cZ, double uX, double uY, double uZ) {}
+GLEOF
+
+i686-w64-mingw32-gcc -shared -o ./AppDir/lib/wine/i386-windows/opengl32.dll /tmp/opengl32.c
+i686-w64-mingw32-gcc -shared -o ./AppDir/lib/wine/i386-windows/glu32.dll /tmp/glu32.c
+i686-w64-mingw32-strip ./AppDir/lib/wine/i386-windows/opengl32.dll ./AppDir/lib/wine/i386-windows/glu32.dll
+
 ls -l ./AppDir/lib/wine/i386-windows/ | wc -l
 ls -l ./AppDir/lib/wine/x86_64-windows/ | wc -l
 ls -l ./AppDir/lib/wine/x86_64-unix/ | wc -l

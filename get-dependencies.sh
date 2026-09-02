@@ -14,7 +14,7 @@ echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm wine # lib32-glibc
 
 if [ "$ARCH" = 'x86_64' ]; then
-	sudo pacman -S --noconfirm mingw-w64-binutils
+	sudo pacman -S --noconfirm mingw-w64-binutils mingw-w64-gcc
 fi
 
 echo "Done."
