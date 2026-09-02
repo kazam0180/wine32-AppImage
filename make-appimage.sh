@@ -49,6 +49,7 @@ EOF
 chmod +x ./AppDir/bin/*.hook
 
 echo 'LD_LIBRARY_PATH=${APPDIR}/lib:${APPDIR}/lib/wine/x86_64-unix' >> ./AppDir/.env
+echo 'WINEARCH=wow64' >> ./AppDir/.env
 
 # Strip Windows DLLs
 if [ "$ARCH" = 'x86_64' ]; then
@@ -56,7 +57,7 @@ if [ "$ARCH" = 'x86_64' ]; then
 fi
 
 # Remove x86_64 Windows DLLs - only need i386 for 32-bit apps
-#rm -rf ./AppDir/lib/wine/x86_64-windows
+rm -rf ./AppDir/lib/wine/x86_64-windows
 
 # Remove GUI-related wine DLLs from i386-windows (keep core APIs)
 echo "Removing GUI wine DLLs..."
@@ -145,8 +146,7 @@ rm -f ./AppDir/lib/wine/i386-windows/dwmapi.dll
 rm -f ./AppDir/lib/wine/i386-windows/dataexchange.dll
 rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore.dll
 rm -f ./AppDir/lib/wine/i386-windows/dxdiagn.dll
-# Remove GDI only if truly not needed (gdi32.dll is core, keep it)
-# rm -f ./AppDir/lib/wine/i386-windows/gdi32.dll  # CORE - keep
+rm -f ./AppDir/lib/wine/i386-windows/gdi32.dll
 rm -f ./AppDir/lib/wine/i386-windows/gdiplus.dll
 rm -f ./AppDir/lib/wine/i386-windows/msimg32.dll
 
