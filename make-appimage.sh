@@ -54,101 +54,173 @@ echo 'WINEARCH=wow64' >> ./AppDir/.env
 # Strip Windows DLLs
 if [ "$ARCH" = 'x86_64' ]; then
 	i686-w64-mingw32-strip -R .comment --strip-unneeded ./AppDir/lib/wine/i386-windows/*.dll 2>/dev/null || true
+	x86_64-w64-mingw32-strip -R .comment --strip-unneeded ./AppDir/lib/wine/x86_64-windows/*.dll 2>/dev/null || true
 fi
-
-# Remove x86_64 Windows DLLs - only need i386 for 32-bit apps
-rm -rf ./AppDir/lib/wine/x86_64-windows
 
 # Remove GUI-related wine DLLs from i386-windows (keep core APIs)
 echo "Removing GUI wine DLLs..."
+ls -l ./AppDir/lib/wine/i386-windows/ | wc -l
+ls -l ./AppDir/lib/wine/x86_64-windows/ | wc -l
+ls -l ./AppDir/lib/wine/x86_64-unix/ | wc -l
+du -hs ./AppDir/lib/wine
+
 # Direct3D/DirectX (all safe to remove)
 rm -f ./AppDir/lib/wine/i386-windows/d2d1.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3d*.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3dcompiler_*.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3drm.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3dx*.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3dxof.dll
-rm -f ./AppDir/lib/wine/i386-windows/dx8vb.dll
-rm -f ./AppDir/lib/wine/i386-windows/dxcore.dll
-rm -f ./AppDir/lib/wine/i386-windows/dxgi.dll
-rm -f ./AppDir/lib/wine/i386-windows/dxtrans.dll
-rm -f ./AppDir/lib/wine/i386-windows/dxva2.dll
+rm -f ./AppDir/lib/wine/i386-windows/d3d*
+rm -f ./AppDir/lib/wine/i386-windows/dx*
 # DDraw
-rm -f ./AppDir/lib/wine/i386-windows/ddraw*.dll
-rm -f ./AppDir/lib/wine/i386-windows/dciman32.dll
+rm -f ./AppDir/lib/wine/i386-windows/ddraw*
+rm -f ./AppDir/lib/wine/i386-windows/dciman*
 # DirectInput
-rm -f ./AppDir/lib/wine/i386-windows/dinput*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dinput*
 # DirectSound
-rm -f ./AppDir/lib/wine/i386-windows/dsound.dll
-rm -f ./AppDir/lib/wine/i386-windows/dsdmo.dll
-rm -f ./AppDir/lib/wine/i386-windows/dswave.dll
+rm -f ./AppDir/lib/wine/i386-windows/dsound*
+rm -f ./AppDir/lib/wine/i386-windows/dsdmo*
+rm -f ./AppDir/lib/wine/i386-windows/dswave*
 # DirectPlay
-rm -f ./AppDir/lib/wine/i386-windows/dplay*.dll
-rm -f ./AppDir/lib/wine/i386-windows/dpn*.dll
-rm -f ./AppDir/lib/wine/i386-windows/dpvoice.dll
-rm -f ./AppDir/lib/wine/i386-windows/dpwsockx.dll
+rm -f ./AppDir/lib/wine/i386-windows/dplay*
+rm -f ./AppDir/lib/wine/i386-windows/dpn*
+rm -f ./AppDir/lib/wine/i386-windows/dpvoice*
+rm -f ./AppDir/lib/wine/i386-windows/dpwsockx*
 # DirectMusic
-rm -f ./AppDir/lib/wine/i386-windows/dmband.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmcompos.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmime.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmloader.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmscript.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmstyle.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmsynth.dll
-rm -f ./AppDir/lib/wine/i386-windows/dmusic*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dmband*
+rm -f ./AppDir/lib/wine/i386-windows/dmcompos*
+rm -f ./AppDir/lib/wine/i386-windows/dmime*
+rm -f ./AppDir/lib/wine/i386-windows/dmloader*
+rm -f ./AppDir/lib/wine/i386-windows/dmscript*
+rm -f ./AppDir/lib/wine/i386-windows/dmstyle*
+rm -f ./AppDir/lib/wine/i386-windows/dmsynth*
+rm -f ./AppDir/lib/wine/i386-windows/dmusic*
 # DirectShow
-rm -f ./AppDir/lib/wine/i386-windows/amstream.dll
-rm -f ./AppDir/lib/wine/i386-windows/devenum.dll
-rm -f ./AppDir/lib/wine/i386-windows/qasf.dll
-rm -f ./AppDir/lib/wine/i386-windows/qcap.dll
-rm -f ./AppDir/lib/wine/i386-windows/qedit.dll
-rm -f ./AppDir/lib/wine/i386-windows/quartz.dll
+rm -f ./AppDir/lib/wine/i386-windows/amstream*
+rm -f ./AppDir/lib/wine/i386-windows/devenum*
+rm -f ./AppDir/lib/wine/i386-windows/qasf*
+rm -f ./AppDir/lib/wine/i386-windows/qcap*
+rm -f ./AppDir/lib/wine/i386-windows/qedit*
+rm -f ./AppDir/lib/wine/i386-windows/quartz*
 # OpenGL/Vulkan
-rm -f ./AppDir/lib/wine/i386-windows/glu32.dll
-rm -f ./AppDir/lib/wine/i386-windows/opengl*.dll
-rm -f ./AppDir/lib/wine/i386-windows/vulkan-1.dll
-rm -f ./AppDir/lib/wine/i386-windows/winevulkan.dll
+rm -f ./AppDir/lib/wine/i386-windows/glu32*
+rm -f ./AppDir/lib/wine/i386-windows/opengl*
+rm -f ./AppDir/lib/wine/i386-windows/*vulkan*
 # Display drivers
 rm -f ./AppDir/lib/wine/i386-windows/winemac.drv
 rm -f ./AppDir/lib/wine/i386-windows/winevulkan.drv
 rm -f ./AppDir/lib/wine/i386-windows/winex11.drv
 rm -f ./AppDir/lib/wine/i386-windows/winewayland.drv
 # Audio
-rm -f ./AppDir/lib/wine/i386-windows/xaudio2_*.dll
-rm -f ./AppDir/lib/wine/i386-windows/x3daudio1_*.dll
-rm -f ./AppDir/lib/wine/i386-windows/xactengine*.dll
-rm -f ./AppDir/lib/wine/i386-windows/xapofx1_*.dll
-rm -f ./AppDir/lib/wine/i386-windows/msacm*.dll
-rm -f ./AppDir/lib/wine/i386-windows/midimap.dll
+rm -f ./AppDir/lib/wine/i386-windows/xaudio2_*
+rm -f ./AppDir/lib/wine/i386-windows/x3daudio1_*
+rm -f ./AppDir/lib/wine/i386-windows/xactengine*
+rm -f ./AppDir/lib/wine/i386-windows/xapofx1_*
+rm -f ./AppDir/lib/wine/i386-windows/msacm*
+rm -f ./AppDir/lib/wine/i386-windows/midimap*
 rm -f ./AppDir/lib/wine/i386-windows/mci*.dll
 # Media Foundation
 rm -f ./AppDir/lib/wine/i386-windows/mf*.dll
 # Camera/Twain
 rm -f ./AppDir/lib/wine/i386-windows/avicap32.dll
-rm -f ./AppDir/lib/wine/i386-windows/twain*.dll
+rm -f ./AppDir/lib/wine/i386-windows/twain*
 # Windows Media
-rm -f ./AppDir/lib/wine/i386-windows/wmadmod.dll
-rm -f ./AppDir/lib/wine/i386-windows/wmasf.dll
-rm -f ./AppDir/lib/wine/i386-windows/wmvcore.dll
-rm -f ./AppDir/lib/wine/i386-windows/wmvdecod.dll
-rm -f ./AppDir/lib/wine/i386-windows/wmp.dll
+rm -f ./AppDir/lib/wine/i386-windows/wmadmod*
+rm -f ./AppDir/lib/wine/i386-windows/wmasf*
+rm -f ./AppDir/lib/wine/i386-windows/wmvcore*
+rm -f ./AppDir/lib/wine/i386-windows/wmvdecod*
+rm -f ./AppDir/lib/wine/i386-windows/wmp*
 # Other GUI
-rm -f ./AppDir/lib/wine/i386-windows/ninput.dll
-rm -f ./AppDir/lib/wine/i386-windows/directmanipulation.dll
-rm -f ./AppDir/lib/wine/i386-windows/magnification.dll
-rm -f ./AppDir/lib/wine/i386-windows/inkobj.dll
-rm -f ./AppDir/lib/wine/i386-windows/graphicscapture.dll
-rm -f ./AppDir/lib/wine/i386-windows/uianimation.dll
-rm -f ./AppDir/lib/wine/i386-windows/uiautomationcore.dll
-rm -f ./AppDir/lib/wine/i386-windows/uiribbon.dll
-rm -f ./AppDir/lib/wine/i386-windows/dcomp.dll
-rm -f ./AppDir/lib/wine/i386-windows/dwmapi.dll
-rm -f ./AppDir/lib/wine/i386-windows/dataexchange.dll
-rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore.dll
-rm -f ./AppDir/lib/wine/i386-windows/dxdiagn.dll
-rm -f ./AppDir/lib/wine/i386-windows/gdi32.dll
-rm -f ./AppDir/lib/wine/i386-windows/gdiplus.dll
-rm -f ./AppDir/lib/wine/i386-windows/msimg32.dll
+rm -f ./AppDir/lib/wine/i386-windows/ninput*
+rm -f ./AppDir/lib/wine/i386-windows/directmanipulation*
+rm -f ./AppDir/lib/wine/i386-windows/magnification*
+rm -f ./AppDir/lib/wine/i386-windows/inkobj*
+rm -f ./AppDir/lib/wine/i386-windows/graphicscapture*
+rm -f ./AppDir/lib/wine/i386-windows/uianimation*
+rm -f ./AppDir/lib/wine/i386-windows/uiautomationcore*
+rm -f ./AppDir/lib/wine/i386-windows/uiribbon*
+rm -f ./AppDir/lib/wine/i386-windows/dcomp*
+rm -f ./AppDir/lib/wine/i386-windows/dwmapi*
+rm -f ./AppDir/lib/wine/i386-windows/dataexchange*
+rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore*
+rm -f ./AppDir/lib/wine/i386-windows/dxdiagn*
+rm -f ./AppDir/lib/wine/i386-windows/gdi*
+rm -f ./AppDir/lib/wine/i386-windows/msimg*
+
+# Direct3D/DirectX (all safe to remove)
+rm -f ./AppDir/lib/wine/x86_64-windows/d2d1.dll
+rm -f ./AppDir/lib/wine/x86_64-windows/d3d*
+rm -f ./AppDir/lib/wine/x86_64-windows/dx*
+# DDraw
+rm -f ./AppDir/lib/wine/x86_64-windows/ddraw*
+rm -f ./AppDir/lib/wine/x86_64-windows/dciman*
+# DirectInput
+rm -f ./AppDir/lib/wine/x86_64-windows/dinput*
+# DirectSound
+rm -f ./AppDir/lib/wine/x86_64-windows/dsound*
+rm -f ./AppDir/lib/wine/x86_64-windows/dsdmo*
+rm -f ./AppDir/lib/wine/x86_64-windows/dswave*
+# DirectPlay
+rm -f ./AppDir/lib/wine/x86_64-windows/dplay*
+rm -f ./AppDir/lib/wine/x86_64-windows/dpn*
+rm -f ./AppDir/lib/wine/x86_64-windows/dpvoice*
+rm -f ./AppDir/lib/wine/x86_64-windows/dpwsockx*
+# DirectMusic
+rm -f ./AppDir/lib/wine/x86_64-windows/dmband*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmcompos*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmime*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmloader*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmscript*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmstyle*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmsynth*
+rm -f ./AppDir/lib/wine/x86_64-windows/dmusic*
+# DirectShow
+rm -f ./AppDir/lib/wine/x86_64-windows/amstream*
+rm -f ./AppDir/lib/wine/x86_64-windows/devenum*
+rm -f ./AppDir/lib/wine/x86_64-windows/qasf*
+rm -f ./AppDir/lib/wine/x86_64-windows/qcap*
+rm -f ./AppDir/lib/wine/x86_64-windows/qedit*
+rm -f ./AppDir/lib/wine/x86_64-windows/quartz*
+# OpenGL/Vulkan
+rm -f ./AppDir/lib/wine/x86_64-windows/glu32*
+rm -f ./AppDir/lib/wine/x86_64-windows/opengl*
+rm -f ./AppDir/lib/wine/x86_64-windows/*vulkan*
+# Display drivers
+rm -f ./AppDir/lib/wine/x86_64-windows/winemac.drv
+rm -f ./AppDir/lib/wine/x86_64-windows/winevulkan.drv
+rm -f ./AppDir/lib/wine/x86_64-windows/winex11.drv
+rm -f ./AppDir/lib/wine/x86_64-windows/winewayland.drv
+# Audio
+rm -f ./AppDir/lib/wine/x86_64-windows/xaudio2_*
+rm -f ./AppDir/lib/wine/x86_64-windows/x3daudio1_*
+rm -f ./AppDir/lib/wine/x86_64-windows/xactengine*
+rm -f ./AppDir/lib/wine/x86_64-windows/xapofx1_*
+rm -f ./AppDir/lib/wine/x86_64-windows/msacm*
+rm -f ./AppDir/lib/wine/x86_64-windows/midimap*
+rm -f ./AppDir/lib/wine/x86_64-windows/mci*.dll
+# Media Foundation
+rm -f ./AppDir/lib/wine/x86_64-windows/mf*.dll
+# Camera/Twain
+rm -f ./AppDir/lib/wine/x86_64-windows/avicap32.dll
+rm -f ./AppDir/lib/wine/x86_64-windows/twain*
+# Windows Media
+rm -f ./AppDir/lib/wine/x86_64-windows/wmadmod*
+rm -f ./AppDir/lib/wine/x86_64-windows/wmasf*
+rm -f ./AppDir/lib/wine/x86_64-windows/wmvcore*
+rm -f ./AppDir/lib/wine/x86_64-windows/wmvdecod*
+rm -f ./AppDir/lib/wine/x86_64-windows/wmp*
+# Other GUI
+rm -f ./AppDir/lib/wine/x86_64-windows/ninput*
+rm -f ./AppDir/lib/wine/x86_64-windows/directmanipulation*
+rm -f ./AppDir/lib/wine/x86_64-windows/magnification*
+rm -f ./AppDir/lib/wine/x86_64-windows/inkobj*
+rm -f ./AppDir/lib/wine/x86_64-windows/graphicscapture*
+rm -f ./AppDir/lib/wine/x86_64-windows/uianimation*
+rm -f ./AppDir/lib/wine/x86_64-windows/uiautomationcore*
+rm -f ./AppDir/lib/wine/x86_64-windows/uiribbon*
+rm -f ./AppDir/lib/wine/x86_64-windows/dcomp*
+rm -f ./AppDir/lib/wine/x86_64-windows/dwmapi*
+rm -f ./AppDir/lib/wine/x86_64-windows/dataexchange*
+rm -f ./AppDir/lib/wine/x86_64-windows/twinapi.appcore*
+rm -f ./AppDir/lib/wine/x86_64-windows/dxdiagn*
+rm -f ./AppDir/lib/wine/x86_64-windows/gdi*
+rm -f ./AppDir/lib/wine/x86_64-windows/msimg*
 
 # Remove GUI-related wine .so from x86_64-unix (keep ntdll.so, win32u.so, ws2_32.so etc.)
 echo "Removing GUI wine .so files..."
@@ -167,6 +239,14 @@ rm -f ./AppDir/lib/wine/x86_64-unix/opencl.so
 rm -f ./AppDir/lib/wine/x86_64-unix/qcap.so
 rm -f ./AppDir/lib/wine/x86_64-unix/sane.so
 rm -f ./AppDir/lib/wine/x86_64-unix/wpcap.so
+
+ls -l ./AppDir/lib/wine/i386-windows/ | wc -l
+ls -l ./AppDir/lib/wine/x86_64-windows/ | wc -l
+ls -l ./AppDir/lib/wine/x86_64-unix/ | wc -l
+
+du -hs ./AppDir/lib/wine
+
+echo '============================================================='
 
 # Remove unnecessary libraries for CLI-only mode
 echo "Removing unnecessary libraries..."
