@@ -147,21 +147,20 @@ rm -f ./AppDir/lib/wine/i386-windows/dataexchange.dll
 rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore.dll
 rm -f ./AppDir/lib/wine/i386-windows/d3dcompiler_*.dll
 
-# Remove GUI-related wine .so from x86_64-unix
+# Remove GUI-related wine .so from x86_64-unix (keep ntdll.so, win32u.so, ws2_32.so etc.)
 echo "Removing GUI wine .so files..."
 rm -f ./AppDir/lib/wine/x86_64-unix/opengl32.so
 rm -f ./AppDir/lib/wine/x86_64-unix/winevulkan.so
-rm -f ./AppDir/lib/wine/x86_64-unix/wined3d.so
-rm -f ./AppDir/lib/wine/x86_64-unix/winegstreamer.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winex11.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winewayland.so
 rm -f ./AppDir/lib/wine/x86_64-unix/winealsa.so
 rm -f ./AppDir/lib/wine/x86_64-unix/winepulse.so
 rm -f ./AppDir/lib/wine/x86_64-unix/wineps.so
-rm -f ./AppDir/lib/wine/x86_64-unix/winex11.so
-rm -f ./AppDir/lib/wine/x86_64-unix/winewayland.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winegstreamer.so
+rm -f ./AppDir/lib/wine/x86_64-unix/winedmo.so
 rm -f ./AppDir/lib/wine/x86_64-unix/avicap32.so
 rm -f ./AppDir/lib/wine/x86_64-unix/gphoto2.so
 rm -f ./AppDir/lib/wine/x86_64-unix/opencl.so
-rm -f ./AppDir/lib/wine/x86_64-unix/winedmo.so
 rm -f ./AppDir/lib/wine/x86_64-unix/qcap.so
 rm -f ./AppDir/lib/wine/x86_64-unix/sane.so
 rm -f ./AppDir/lib/wine/x86_64-unix/wpcap.so
