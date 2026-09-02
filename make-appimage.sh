@@ -26,11 +26,11 @@ export DEPLOY_OPENGL=0
 # Deploy from Kron4ek 32-bit wine build
 mkdir -p /tmp/wine
 WINEPREFIX=/tmp/wine quick-sharun \
-	/tmp/wine-x86/bin/wine         \
-	/tmp/wine-x86/bin/wineserver   \
-	/tmp/wine-x86/bin/wineboot     \
-	/tmp/wine-x86/bin/regsvr32     \
-	/tmp/wine-x86/lib/wine
+	/usr/bin/wine              \
+	/usr/bin/wineserver        \
+	/usr/bin/wineboot          \
+	/usr/bin/regsvr32          \
+	/usr/lib/wine
 
 # alright here the pain starts
 ln -sr ./AppDir/lib/wine/i386-unix/*.so* ./AppDir/bin
@@ -38,7 +38,7 @@ ln -sr ./AppDir/lib/wine/i386-unix/*.so* ./AppDir/bin
 # Patch wine binary with random interpreter
 kek=.$(tr -dc 'A-Za-z0-9_=-' < /dev/urandom | head -c 10)
 rm -f ./AppDir/lib/wine/i386-unix/wine
-cp /tmp/wine-x86/lib/wine/i386-unix/wine ./AppDir/lib/wine/i386-unix/wine
+cp /usr/lib/wine/i386-unix/wine ./AppDir/lib/wine/i386-unix/wine
 patchelf --set-interpreter /tmp/"$kek" ./AppDir/lib/wine/i386-unix/wine
 patchelf --add-needed anylinux.so ./AppDir/shared/lib/libc.so.6
 

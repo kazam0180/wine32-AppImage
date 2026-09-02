@@ -17,5 +17,6 @@ echo "Downloading Kron4ek wine 11.16 x86..."
 wget --retry-connrefused --tries=30 https://github.com/Kron4ek/Wine-Builds/releases/download/11.16/wine-11.16-x86.tar.xz -O /tmp/wine-x86.tar.xz
 mkdir -p /tmp/wine-x86
 tar -xf /tmp/wine-x86.tar.xz -C /tmp/wine-x86 --strip-components=1
+sudo cp -r /tmp/wine-x86/* /usr/
 
 echo "Done."
