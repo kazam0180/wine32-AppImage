@@ -56,21 +56,19 @@ if [ "$ARCH" = 'x86_64' ]; then
 fi
 
 # Remove x86_64 Windows DLLs - only need i386 for 32-bit apps
-rm -rf ./AppDir/lib/wine/x86_64-windows
+#rm -rf ./AppDir/lib/wine/x86_64-windows
 
-# Remove GUI-related wine DLLs from i386-windows
+# Remove GUI-related wine DLLs from i386-windows (keep core APIs)
 echo "Removing GUI wine DLLs..."
-# Direct3D/DirectX
+# Direct3D/DirectX (all safe to remove)
 rm -f ./AppDir/lib/wine/i386-windows/d2d1.dll
 rm -f ./AppDir/lib/wine/i386-windows/d3d*.dll
 rm -f ./AppDir/lib/wine/i386-windows/d3dcompiler_*.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3dim*.dll
 rm -f ./AppDir/lib/wine/i386-windows/d3drm.dll
 rm -f ./AppDir/lib/wine/i386-windows/d3dx*.dll
 rm -f ./AppDir/lib/wine/i386-windows/d3dxof.dll
 rm -f ./AppDir/lib/wine/i386-windows/dx8vb.dll
 rm -f ./AppDir/lib/wine/i386-windows/dxcore.dll
-rm -f ./AppDir/lib/wine/i386-windows/dxdiagn.dll
 rm -f ./AppDir/lib/wine/i386-windows/dxgi.dll
 rm -f ./AppDir/lib/wine/i386-windows/dxtrans.dll
 rm -f ./AppDir/lib/wine/i386-windows/dxva2.dll
@@ -104,22 +102,17 @@ rm -f ./AppDir/lib/wine/i386-windows/qasf.dll
 rm -f ./AppDir/lib/wine/i386-windows/qcap.dll
 rm -f ./AppDir/lib/wine/i386-windows/qedit.dll
 rm -f ./AppDir/lib/wine/i386-windows/quartz.dll
-# GDI/Graphics
-rm -f ./AppDir/lib/wine/i386-windows/gdi32.dll
-rm -f ./AppDir/lib/wine/i386-windows/gdiplus.dll
+# OpenGL/Vulkan
 rm -f ./AppDir/lib/wine/i386-windows/glu32.dll
 rm -f ./AppDir/lib/wine/i386-windows/opengl*.dll
-rm -f ./AppDir/lib/wine/i386-windows/msimg32.dll
+rm -f ./AppDir/lib/wine/i386-windows/vulkan-1.dll
+rm -f ./AppDir/lib/wine/i386-windows/winevulkan.dll
 # Display drivers
 rm -f ./AppDir/lib/wine/i386-windows/winemac.drv
 rm -f ./AppDir/lib/wine/i386-windows/winevulkan.drv
 rm -f ./AppDir/lib/wine/i386-windows/winex11.drv
 rm -f ./AppDir/lib/wine/i386-windows/winewayland.drv
-# Vulkan
-rm -f ./AppDir/lib/wine/i386-windows/vulkan-1.dll
-rm -f ./AppDir/lib/wine/i386-windows/winevulkan.dll
 # Audio
-rm -f ./AppDir/lib/wine/i386-windows/dsound.dll
 rm -f ./AppDir/lib/wine/i386-windows/xaudio2_*.dll
 rm -f ./AppDir/lib/wine/i386-windows/x3daudio1_*.dll
 rm -f ./AppDir/lib/wine/i386-windows/xactengine*.dll
@@ -132,6 +125,12 @@ rm -f ./AppDir/lib/wine/i386-windows/mf*.dll
 # Camera/Twain
 rm -f ./AppDir/lib/wine/i386-windows/avicap32.dll
 rm -f ./AppDir/lib/wine/i386-windows/twain*.dll
+# Windows Media
+rm -f ./AppDir/lib/wine/i386-windows/wmadmod.dll
+rm -f ./AppDir/lib/wine/i386-windows/wmasf.dll
+rm -f ./AppDir/lib/wine/i386-windows/wmvcore.dll
+rm -f ./AppDir/lib/wine/i386-windows/wmvdecod.dll
+rm -f ./AppDir/lib/wine/i386-windows/wmp.dll
 # Other GUI
 rm -f ./AppDir/lib/wine/i386-windows/ninput.dll
 rm -f ./AppDir/lib/wine/i386-windows/directmanipulation.dll
@@ -145,7 +144,11 @@ rm -f ./AppDir/lib/wine/i386-windows/dcomp.dll
 rm -f ./AppDir/lib/wine/i386-windows/dwmapi.dll
 rm -f ./AppDir/lib/wine/i386-windows/dataexchange.dll
 rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore.dll
-rm -f ./AppDir/lib/wine/i386-windows/d3dcompiler_*.dll
+rm -f ./AppDir/lib/wine/i386-windows/dxdiagn.dll
+# Remove GDI only if truly not needed (gdi32.dll is core, keep it)
+# rm -f ./AppDir/lib/wine/i386-windows/gdi32.dll  # CORE - keep
+rm -f ./AppDir/lib/wine/i386-windows/gdiplus.dll
+rm -f ./AppDir/lib/wine/i386-windows/msimg32.dll
 
 # Remove GUI-related wine .so from x86_64-unix (keep ntdll.so, win32u.so, ws2_32.so etc.)
 echo "Removing GUI wine .so files..."
