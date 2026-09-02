@@ -37,9 +37,9 @@ ln -sr ./AppDir/lib/wine/i386-unix/*.so* ./AppDir/bin
 
 # Patch wine binary with random interpreter
 kek=.$(tr -dc 'A-Za-z0-9_=-' < /dev/urandom | head -c 10)
-rm -f ./AppDir/lib/wine/i386-unix/wine
-cp /usr/lib/wine/i386-unix/wine ./AppDir/lib/wine/i386-unix/wine
-patchelf --set-interpreter /tmp/"$kek" ./AppDir/lib/wine/i386-unix/wine
+rm -f ./AppDir/shared/bin/wine
+cp /usr/bin/wine ./AppDir/shared/bin/wine
+patchelf --set-interpreter /tmp/"$kek" ./AppDir/shared/bin/wine
 patchelf --add-needed anylinux.so ./AppDir/shared/lib/libc.so.6
 
 # Also need 32-bit ld-linux for the 32-bit wine binary
