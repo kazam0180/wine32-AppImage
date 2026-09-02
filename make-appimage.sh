@@ -47,6 +47,7 @@ cp /lib/ld-linux.so.2 ./AppDir/shared/lib/ld-linux.so.2
 
 cat <<EOF > ./AppDir/bin/random-linker.src.hook
 #!/bin/sh
+mkdir -p /tmp/"$kek"
 cp -f "\$APPDIR"/shared/lib/ld-linux*.so* /tmp/"$kek"
 EOF
 chmod +x ./AppDir/bin/*.hook
