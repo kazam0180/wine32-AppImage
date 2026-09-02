@@ -153,7 +153,7 @@ rm -f ./AppDir/lib/wine/i386-windows/dwmapi*
 rm -f ./AppDir/lib/wine/i386-windows/dataexchange*
 rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore*
 rm -f ./AppDir/lib/wine/i386-windows/dxdiagn*
-rm -f ./AppDir/lib/wine/i386-windows/gdi*
+rm -f ./AppDir/lib/wine/i386-windows/gdiplus*
 rm -f ./AppDir/lib/wine/i386-windows/msimg*
 
 # Remove GUI-related wine .so from i386-unix
