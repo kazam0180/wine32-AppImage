@@ -58,6 +58,49 @@ fi
 # Remove x86_64 Windows DLLs - only need i386 for 32-bit apps
 rm -rf ./AppDir/lib/wine/x86_64-windows
 
+# Remove unnecessary libraries for CLI-only mode
+echo "Removing unnecessary libraries..."
+rm -rf ./AppDir/lib/alsa-lib
+rm -rf ./AppDir/lib/pulseaudio
+rm -f ./AppDir/lib/libasound*
+rm -f ./AppDir/lib/libpulse*
+rm -f ./AppDir/lib/libFLAC*
+rm -f ./AppDir/lib/libogg*
+rm -f ./AppDir/lib/libopus*
+rm -f ./AppDir/lib/libvorbis*
+rm -f ./AppDir/lib/libmp3lame*
+rm -f ./AppDir/lib/libmpg123*
+rm -f ./AppDir/lib/libsndfile*
+rm -f ./AppDir/lib/libdrm*
+rm -f ./AppDir/lib/libEGL*
+rm -f ./AppDir/lib/libGL*
+rm -f ./AppDir/lib/libgallium*
+rm -f ./AppDir/lib/libLLVM*
+rm -f ./AppDir/lib/libSPIRV*
+rm -f ./AppDir/lib/libgbm*
+rm -f ./AppDir/lib/libpciaccess*
+rm -f ./AppDir/lib/libX11*
+rm -f ./AppDir/lib/libxcb*
+rm -f ./AppDir/lib/libXcursor*
+rm -f ./AppDir/lib/libXext*
+rm -f ./AppDir/lib/libXfixes*
+rm -f ./AppDir/lib/libXi*
+rm -f ./AppDir/lib/libXrandr*
+rm -f ./AppDir/lib/libXrender*
+rm -f ./AppDir/lib/libXxf86vm*
+rm -f ./AppDir/lib/libxkb*
+rm -f ./AppDir/lib/libwayland*
+rm -f ./AppDir/lib/libasyncns*
+rm -f ./AppDir/lib/libdbus*
+rm -f ./AppDir/lib/libsystemd*
+rm -f ./AppDir/lib/libudev*
+rm -f ./AppDir/lib/libpcap*
+rm -f ./AppDir/lib/libsensors*
+rm -f ./AppDir/lib/libusb*
+rm -f ./AppDir/lib/libgphoto2*
+rm -f ./AppDir/lib/libnl-*
+rm -f ./AppDir/lib/libnss_*
+
 # Clean up broken symlinks
 find ./AppDir/ -xtype l -delete 2>/dev/null || true
 
