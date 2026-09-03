@@ -1,10 +1,10 @@
 <div align="center">
 
-# wine AppImage 🐧
+# wine32-cli AppImage 🐧
 
-[![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/wine-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/wine-AppImage/releases/latest)
-[![CI Build Status](https://github.com//pkgforge-dev/wine-AppImage/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/wine-AppImage/releases/latest)
-[![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/wine-AppImage)](https://github.com/pkgforge-dev/wine-AppImage/releases/latest)
+[![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/wine32-cli-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/wine32-cli-AppImage/releases/latest)
+[![CI Build Status](https://github.com//pkgforge-dev/wine32-cli-AppImage/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/wine32-cli-AppImage/releases/latest)
+[![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/wine32-cli-AppImage)](https://github.com/pkgforge-dev/wine32-cli-AppImage/releases/latest)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/Papirus/64x64/apps/wine.svg" width="128" />
@@ -12,9 +12,10 @@
 
 | Latest Stable Release | Upstream URL |
 | :---: | :---: |
-| [Click here](https://github.com/pkgforge-dev/wine-AppImage/releases/latest) | [Click here](https://www.winehq.org/) |
+| [Click here](https://github.com/pkgforge-dev/wine32-cli-AppImage/releases/latest) | [Click here](https://www.winehq.org/) |
 
-**winetricks is also included.**
+All the GUI libraries and executables are stripped.
+Uses [Kron4ek's wine builds](https://github.com/Kron4ek/Wine-Builds)
 
 </div>
 
