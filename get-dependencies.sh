@@ -14,6 +14,7 @@ echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 sudo pacman -Syu --noconfirm patchelf
 
+# Only install mingw strip tools for32-bit DLL stripping
 if [ "$ARCH" = 'x86_64' ]; then
 	# lib32-gcc-libs provides the 32-bit libgcc_s.so.1 needed to link
 	# anylinux.so with -m32 (32-bit deployment mode of quick-sharun)
