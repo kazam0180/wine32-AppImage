@@ -155,6 +155,48 @@ rm -f ./AppDir/lib/wine/i386-windows/twinapi.appcore*
 rm -f ./AppDir/lib/wine/i386-windows/dxdiagn*
 rm -f ./AppDir/lib/wine/i386-windows/gdiplus*
 rm -f ./AppDir/lib/wine/i386-windows/msimg*
+# Graphics/compute not needed for CLI
+rm -f ./AppDir/lib/wine/i386-windows/wined3d.dll
+rm -f ./AppDir/lib/wine/i386-windows/opencl.dll
+rm -f ./AppDir/lib/wine/i386-windows/explorerframe.dll
+rm -f ./AppDir/lib/wine/i386-windows/dwrite.dll
+rm -f ./AppDir/lib/wine/i386-windows/wineps.drv
+rm -f ./AppDir/lib/wine/i386-windows/gphoto2.ds
+rm -f ./AppDir/lib/wine/i386-windows/sane.ds
+# Static libraries (never needed at runtime)
+rm -f ./AppDir/lib/wine/i386-windows/*.a
+# GUI applications
+rm -f ./AppDir/lib/wine/i386-windows/iexplore.exe
+rm -f ./AppDir/lib/wine/i386-windows/wordpad.exe
+rm -f ./AppDir/lib/wine/i386-windows/notepad.exe
+rm -f ./AppDir/lib/wine/i386-windows/write.exe
+rm -f ./AppDir/lib/wine/i386-windows/regedit.exe
+rm -f ./AppDir/lib/wine/i386-windows/winecfg.exe
+rm -f ./AppDir/lib/wine/i386-windows/winefile.exe
+rm -f ./AppDir/lib/wine/i386-windows/wineconsole.exe
+rm -f ./AppDir/lib/wine/i386-windows/winemine.exe
+rm -f ./AppDir/lib/wine/i386-windows/winebrowser.exe
+rm -f ./AppDir/lib/wine/i386-windows/winhlp32.exe
+rm -f ./AppDir/lib/wine/i386-windows/winevdm.exe
+rm -f ./AppDir/lib/wine/i386-windows/explorer.exe
+rm -f ./AppDir/lib/wine/i386-windows/progman.exe
+rm -f ./AppDir/lib/wine/i386-windows/clock.exe
+rm -f ./AppDir/lib/wine/i386-windows/taskmgr.exe
+rm -f ./AppDir/lib/wine/i386-windows/control.exe
+rm -f ./AppDir/lib/wine/i386-windows/powershell.exe
+rm -f ./AppDir/lib/wine/i386-windows/mshta.exe
+rm -f ./AppDir/lib/wine/i386-windows/hh.exe
+rm -f ./AppDir/lib/wine/i386-windows/oleview.exe
+rm -f ./AppDir/lib/wine/i386-windows/msinfo32.exe
+rm -f ./AppDir/lib/wine/i386-windows/odbcad32.exe
+rm -f ./AppDir/lib/wine/i386-windows/dpvsetup.exe
+rm -f ./AppDir/lib/wine/i386-windows/icinfo.exe
+rm -f ./AppDir/lib/wine/i386-windows/uninstaller.exe
+rm -f ./AppDir/lib/wine/i386-windows/presentationfontcache.exe
+rm -f ./AppDir/lib/wine/i386-windows/winver.exe
+rm -f ./AppDir/lib/wine/i386-windows/dllhost.exe
+rm -f ./AppDir/lib/wine/i386-windows/wusa.exe
+rm -f ./AppDir/lib/wine/i386-windows/msiexec.exe
 
 # Remove GUI-related wine .so from i386-unix
 echo "Removing GUI wine .so files..."
