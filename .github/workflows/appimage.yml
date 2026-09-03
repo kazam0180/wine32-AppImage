@@ -21,15 +21,41 @@ jobs:
 #          - runs-on: ubuntu-24.04-arm
 #            name: Build AppImage
 #            arch: aarch64
-    container: ghcr.io/pkgforge-dev/archlinux:latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Preparing Container
-        uses: pkgforge-dev/anylinux-setup-action@0964f2258d6c93d1391359978dde081fd8b3c6af # v2
-      - name: Install Dependencies
-        run: /bin/sh ./get-dependencies.sh
-      - name: Make AppImage
-        run: /bin/sh ./make-appimage.sh
+      - name: Build in Void i686 container
+        run: |
+          cat > build.sh <<'EOF'
+          #!/bin/sh
+          set -e
+          docker run --rm --platform linux/386 \
+            -it \
+            -e GITHUB_REPOSITORY \
+            -e GITHUB_RUN_ID \
+            -e GITHUB_SHA \
+            -v "$PWD":/workdir -w /workdir \
+            ghcr.io/void-linux/void-glibc-full:latest \
+            sh -c '
+              set -e
+              xbps-install -Syu || true
+              xbps-install -Syu 7zip bash binutils curl findutils freetype-devel gawk gcc git \
+                glibc-devel jq libX11-devel libXrandr-devel libXScrnSaver-devel make patchelf \
+                pkg-config pulseaudio sed strace tar unzip wget xvfb-run xz zlib-devel
+              mkdir -p /usr/local/bin
+              wget --retry-connrefused --tries=30 -O /usr/local/bin/quick-sharun \
+                https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh
+              wget --retry-connrefused --tries=30 -O /usr/local/bin/get-debloated-pkgs \
+                https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/get-debloated-pkgs.sh
+              chmod +x /usr/local/bin/quick-sharun /usr/local/bin/get-debloated-pkgs
+              chmod +x ./get-dependencies.sh
+              chmod +x ./make-appimage.sh
+              ./get-dependencies.sh
+              ./make-appimage.sh
+            '
+          EOF
+          chmod +x build.sh
+          script -qec ./build.sh /dev/null
+
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
