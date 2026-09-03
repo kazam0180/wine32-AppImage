@@ -12,7 +12,7 @@ fi
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-sudo pacman -Syu --noconfirm patchelf file
+sudo pacman -Syu --noconfirm patchelf
 
 if [ "$ARCH" = 'x86_64' ]; then
 	# lib32-gcc-libs provides the 32-bit libgcc_s.so.1 needed to link
@@ -21,10 +21,12 @@ if [ "$ARCH" = 'x86_64' ]; then
 fi
 
 # Download Kron4ek 32-bit wine build
-echo "Downloading Kron4ek wine 11.16 x86..."
-wget --retry-connrefused --tries=30 https://github.com/Kron4ek/Wine-Builds/releases/download/11.16/wine-11.16-x86.tar.xz -O /tmp/wine-x86.tar.xz
+TAG="$(curl -s https://api.github.com/repos/Kron4ek/Wine-Builds/releases/latest | jq -r '.tag_name')"
+echo "Downloading Kron4ek wine $TAG x86..."
+wget --retry-connrefused --tries=30 https://github.com/Kron4ek/Wine-Builds/releases/download/$TAG/wine-$TAG-x86.tar.xz -O /tmp/wine-x86.tar.xz
 mkdir -p /tmp/wine-x86
 tar -xf /tmp/wine-x86.tar.xz -C /tmp/wine-x86 --strip-components=1
 sudo cp -r /tmp/wine-x86/* /usr/
+rm -rf /tmp/wine*
 
 echo "Done."

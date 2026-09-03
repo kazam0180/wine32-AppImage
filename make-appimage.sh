@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Minimal 32-bit CLI-only Wine AppImage
-# For running CLI apps like COD1 map compiler (coutils.exe)
+# For running CLI apps like COD1 map compiler
 # Uses Kron4ek 32-bit wine build (no WoW64 needed)
 
 set -eu
 
 ARCH=$(uname -m)
-VERSION="11.16"
+VERSION="$(curl -s https://api.github.com/repos/Kron4ek/Wine-Builds/releases/latest | jq -r '.tag_name' | sed 's|^v||')"
 export ARCH VERSION
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.hook"
